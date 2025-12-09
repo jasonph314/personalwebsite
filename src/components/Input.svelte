@@ -10,6 +10,9 @@
 
   let input: HTMLInputElement;
 
+  // Navigation commands that clear history and show fresh content
+  const navCommands = ['about', 'projects', 'blog', 'setup', 'aoc', 'resume', 'contact', 'banner', 'help'];
+
   onMount(() => {
     input.focus();
 
@@ -19,7 +22,7 @@
       if (command) {
         const output = command();
 
-        $history = [...$history, { command: 'banner', outputs: [output] }];
+        $history = [{ command: 'banner', outputs: [output] }];
       }
     }
   });
@@ -41,16 +44,23 @@
       if (commandFunction) {
         const output = await commandFunction(args);
 
-        if (commandName !== 'clear') {
+        if (commandName === 'clear') {
+          // Clear command - do nothing, history already cleared
+        } else if (navCommands.includes(commandName) && args.length === 0) {
+          // Navigation command - clear history and show only this content
+          $history = [{ command, outputs: [output] }];
+        } else {
+          // Other commands - append to history
           $history = [...$history, { command, outputs: [output] }];
         }
       } else {
-        const output = `${commandName}: command not found`;
+        const output = `${commandName}: command not found. Type 'help' for available commands.`;
 
         $history = [...$history, { command, outputs: [output] }];
       }
 
       command = '';
+      historyIndex = -1;
     } else if (event.key === 'ArrowUp') {
       if (historyIndex < $history.length - 1) {
         historyIndex++;
@@ -93,7 +103,7 @@
 />
 
 <div class="flex w-full">
-  <p class="visible md:hidden">❯</p>
+  <p class="visible md:hidden">></p>
 
   <input
     id="command-input"

@@ -6,7 +6,7 @@ import { theme } from "../stores/theme";
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
   help: () => {
     const categories = {
-      "Navigation": ["about", "projects", "blog", "uses", "aoc", "resume"],
+      "Navigation": ["about", "projects", "blog", "setup", "aoc", "resume"],
       "Contact": ["github", "linkedin", "email", "contact"],
       "System": ["help", "clear", "banner", "theme"],
     };
@@ -125,10 +125,10 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     return 'Opening resume in new tab...';
   },
 
-  // ============ USES / SETUP ============
-  uses: () => `
-  What I Use
-  ----------
+  // ============ SETUP ============
+  setup: () => `
+  My Setup
+  --------
 
   Editor
     Neovim - The one true editor. Configured for speed

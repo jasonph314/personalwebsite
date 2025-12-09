@@ -8,7 +8,7 @@
     { label: 'About', command: 'about' },
     { label: 'Projects', command: 'projects' },
     { label: 'Blog', command: 'blog' },
-    { label: 'Uses', command: 'uses' },
+    { label: 'Setup', command: 'setup' },
     { label: 'AoC', command: 'aoc' },
     { label: 'Resume', command: 'resume' },
   ];

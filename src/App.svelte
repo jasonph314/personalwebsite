@@ -13,7 +13,9 @@
 
     if (commandFunction) {
       const output = await commandFunction([]);
-      $history = [...$history, { command: commandName, outputs: [output] }];
+      
+      // Clear history and show only this section
+      $history = [{ command: commandName, outputs: [output] }];
     }
   }
 </script>
