@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Cascadia Code';
+  src: url('/fonts/CascadiaCode.ttf');
+}
+
+* {
+  font-family: 'Cascadia Code', monospace;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar - subtle and clean */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #585b70 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #585b70;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cba6f7;
+}
+
+/* Clean text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Terminal output spacing */
+.whitespace-pre {
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* Selection color - matches theme */
+::selection {
+  background-color: rgba(203, 166, 247, 0.3);
+  color: inherit;
+}
+
+/* Focus states */
+*:focus {
+  outline: none;
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  transition: all 0.15s ease;
+}
+
+/* Input cursor */
+input {
+  caret-color: #cba6f7;
+}
+
+/* Responsive font sizing */
+@media (max-width: 640px) {
+  .whitespace-pre {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+}
