@@ -1,107 +1,89 @@
-import packageJson from "../../package.json";
 import themes from "../../themes.json";
-import { history } from "../stores/history";
 import { theme } from "../stores/theme";
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
-  help: () => {
-    const categories = {
-      "Navigation": ["about", "projects", "blog", "setup", "aoc", "resume"],
-      "Contact": ["github", "linkedin", "email", "contact"],
-      "System": ["help", "clear", "banner", "theme"],
-    };
+  help: () => `Help
+────
 
-    let output = "Available commands:\n\n";
+Navigation
+  about      Learn about me
+  projects   View my projects
+  blog       Read blog posts
+  setup      My development setup
+  aoc        Advent of Code solutions
+  resume     Open my resume (PDF)
 
-    for (const [category, cmds] of Object.entries(categories)) {
-      output += `${category}:\n`;
-      output += cmds.map((cmd) => `  ${cmd}`).join("\n");
-      output += "\n\n";
-    }
+Contact
+  contact    View contact info
+  github     Open GitHub profile
+  linkedin   Open LinkedIn profile
+  email      Send me an email
 
-    output += 'Tip: Use the navigation bar above or type commands directly.';
-
-    return output;
-  },
+System
+  help       Show this help message
+  clear      Clear the screen
+  banner     Show welcome banner
+  theme      Change color theme`,
 
   // ============ ABOUT ============
-  about: () => `
-  Hi, I'm Jason Hong (jasonph)
+  about: () => `About
+─────
 
-  Currently a sophomore at MIT studying Computer Science 
-  and Engineering. I'm a generalist at heart and enjoy 
-  finding intersections between different fields.
+Hi, I'm Jason Hong (jasonph).
 
-  On my free time, I enjoy playing or watching basketball.
+Currently a sophomore at MIT studying Computer Science 
+and Engineering. I'm a generalist at heart and enjoy 
+finding intersections between different fields.
 
-  Location: Cambridge, MA
+On my free time, I enjoy playing or watching basketball.
 
-  Type 'projects' to see my work, or 'contact' to get in touch.
-`,
+Location: Cambridge, MA`,
 
   // ============ PROJECTS ============
-  projects: () => `
-  Projects
-  --------
+  projects: () => `Projects
+────────
 
-  [1] AI Drone Project
-      Details coming soon...
+[1] AI Drone Project
+    Details coming soon...
 
-  [2] More projects TBD
-      Check back later for updates!
-
-  ---
-  Want to collaborate? Type 'contact' to reach out.
-`,
+[2] More projects TBD
+    Check back later for updates!`,
 
   // ============ BLOG ============
   blog: async (args: string[]) => {
     if (args.length === 0) {
-      // List all blog posts
       try {
         const response = await fetch('/blog/index.json');
         if (!response.ok) {
-          return `
-  Blog
-  ----
+          return `Blog
+────
 
-  No posts yet. Check back soon!
-
-  ---
-  Type 'blog <slug>' to read a specific post.
-`;
+No posts yet. Check back soon!`;
         }
         const posts = await response.json();
         
         if (posts.length === 0) {
-          return `
-  Blog
-  ----
+          return `Blog
+────
 
-  No posts yet. Check back soon!
-`;
+No posts yet. Check back soon!`;
         }
 
-        let output = `
-  Blog
-  ----
+        let output = `Blog
+────
 
 `;
         posts.forEach((post: { slug: string; title: string; date: string; description: string }, index: number) => {
-          output += `  [${index + 1}] ${post.title}\n`;
-          output += `      ${post.date} - ${post.description}\n`;
-          output += `      > blog ${post.slug}\n\n`;
+          output += `[${index + 1}] ${post.title}\n`;
+          output += `    ${post.date} - ${post.description}\n\n`;
         });
 
-        output += `  ---\n  Type 'blog <slug>' to read a post.`;
         return output;
       } catch {
-        return `
-  Blog
-  ----
+        return `Blog
+────
 
-  No posts yet. Check back soon!
-`;
+No posts yet. Check back soon!`;
       }
     }
 
@@ -110,78 +92,74 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     try {
       const response = await fetch(`/blog/posts/${slug}.md`);
       if (!response.ok) {
-        return `Post '${slug}' not found. Type 'blog' to see all posts.`;
+        return `Post '${slug}' not found.`;
       }
       const content = await response.text();
-      return `\n${content}`;
+      return content;
     } catch {
-      return `Error loading post '${slug}'. Type 'blog' to see all posts.`;
+      return `Error loading post '${slug}'.`;
     }
   },
 
   // ============ RESUME ============
   resume: () => {
     window.open('/resume.pdf', '_blank');
-    return 'Opening resume in new tab...';
+    return `Resume
+──────
+
+Opening resume in new tab...`;
   },
 
   // ============ SETUP ============
-  setup: () => `
-  My Setup
-  --------
+  setup: () => `My Setup
+────────
 
-  Editor
-    Neovim - The one true editor. Configured for speed
-    and efficiency with a minimal setup.
+Editor
+  Neovim
+  The one true editor. Configured for speed and 
+  efficiency with a minimal setup.
 
-  Hardware
-    Kinesis Advantage 360 - Split ergonomic keyboard.
-    Once you go ergo, you never go back.
+Hardware
+  Kinesis Advantage 360
+  Split ergonomic keyboard. Once you go ergo, 
+  you never go back.
 
-  OS / Environment
-    Omarchy - My daily driver. A beautifully crafted
-    Arch-based distro that just works.
-
-  ---
-  Type 'about' to learn more about me.
-`,
+OS / Environment
+  Omarchy
+  My daily driver. A beautifully crafted 
+  Arch-based distro that just works.`,
 
   // ============ ADVENT OF CODE ============
-  aoc: () => `
-  Advent of Code Solutions
-  ------------------------
+  aoc: () => `Advent of Code
+──────────────
 
-  Coming soon!
+Coming soon!
 
-  I'll be adding my solutions for various years here.
-  Check back later for updates.
+I'll be adding my solutions for various years here.
+Check back later for updates.
 
-  ---
-  Learn more: https://adventofcode.com
-`,
+Learn more at adventofcode.com`,
 
   // ============ CONTACT ============
-  contact: () => `
-  Contact
-  -------
+  contact: () => `Contact
+───────
 
-  Email:    jasonph@mit.edu
-  GitHub:   github.com/jasonph314
-  LinkedIn: linkedin.com/in/jasonphong
+Email     jasonph@mit.edu
+GitHub    github.com/jasonph314
+LinkedIn  linkedin.com/in/jasonphong
 
-  ---
-  Type 'email', 'github', or 'linkedin' to open directly.
-`,
+Click the icons in the navigation bar or press / and 
+type 'email', 'github', or 'linkedin' to open directly.`,
 
   // ============ SOCIAL LINKS ============
   github: () => {
     window.open('https://github.com/jasonph314', '_blank');
-    return 'Opening GitHub profile...';
+    return 'Opening GitHub...';
   },
 
   linkedin: () => {
     window.open('https://www.linkedin.com/in/jasonphong/', '_blank');
-    return 'Opening LinkedIn profile...';
+    return 'Opening LinkedIn...';
   },
 
   email: () => {
@@ -191,8 +169,7 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
 
   // ============ SYSTEM ============
   clear: () => {
-    history.set([]);
-    return "";
+    return '';
   },
 
   banner: () => `
@@ -202,31 +179,38 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   | |_| | (_| \\__ \\ (_) | | | | |  _  | (_) | | | | (_| |
    \\___/ \\__,_|___/\\___/|_| |_| |_| |_|\\___/|_| |_|\\__, |
                                                    |___/ 
-  
-  MIT CS '27 | Generalist | Builder
 
-  Navigate using the buttons above, or type 'help' for commands.
+CS @ MIT
 `,
 
   theme: (args: string[]) => {
-    const usage = `Usage: theme [args].
-    [args]:
-      ls: list all available themes
-      set: set theme to [theme]
+    const usage = `Theme
+─────
 
-    [Examples]:
-      theme ls
-      theme set rainynight
-    `;
+Usage: theme [command]
+
+Commands:
+  ls          List all available themes
+  set [name]  Set theme to [name]
+
+Examples:
+  theme ls
+  theme set dracula`;
+
     if (args.length === 0) {
       return usage;
     }
 
     switch (args[0]) {
       case "ls": {
-        let result = themes.map((t) => t.name.toLowerCase()).join(", ");
-        result += `\n\nCurrent theme: RainyNight (default)`;
-        return result;
+        const themeList = themes.map((t) => t.name.toLowerCase()).join(", ");
+        return `Theme
+─────
+
+Available themes:
+${themeList}
+
+Current: RainyNight`;
       }
 
       case "set": {
@@ -242,7 +226,6 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
         }
 
         theme.set(t);
-
         return `Theme set to ${t.name}`;
       }
 
@@ -270,4 +253,15 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   vi: () => `why use vi? try 'emacs'`,
   vim: () => `why use vim? try 'emacs'`,
   emacs: () => `why use emacs? try 'vim'`,
+  neofetch: () => `neofetch
+────────
+
+       /\\          guest@jasonhong.net
+      /  \\         ───────────────────
+     /\\   \\        OS: Omarchy (Arch-based)
+    /  ..  \\       Editor: Neovim
+   /  '  '  \\      Keyboard: Kinesis 360
+  / ..'  '.. \\     Theme: RainyNight
+ /_'        '_\\    
+                   CS @ MIT`,
 };

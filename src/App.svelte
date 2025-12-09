@@ -1,11 +1,26 @@
 <script lang="ts">
-  import Ps1 from './components/Ps1.svelte';
-  import Input from './components/Input.svelte';
-  import History from './components/History.svelte';
+  import { onMount } from 'svelte';
   import NavBar from './components/NavBar.svelte';
+  import ContentView from './components/ContentView.svelte';
+  import TerminalInput from './components/TerminalInput.svelte';
   import { theme } from './stores/theme';
-  import { history } from './stores/history';
   import { commands } from './utils/commands';
+
+  // Current content to display
+  let currentContent = '';
+  let currentCommand = 'banner';
+
+  // Navigation commands that show as clean pages
+  const navCommands = ['about', 'projects', 'blog', 'setup', 'aoc', 'resume', 'contact', 'banner', 'help'];
+
+  onMount(async () => {
+    // Show banner on initial load
+    const bannerFn = commands['banner'] as () => string;
+    if (bannerFn) {
+      currentContent = bannerFn();
+      currentCommand = 'banner';
+    }
+  });
 
   async function handleNavCommand(event: CustomEvent<{ command: string }>) {
     const commandName = event.detail.command;
@@ -13,9 +28,23 @@
 
     if (commandFunction) {
       const output = await commandFunction([]);
-      
-      // Clear history and show only this section
-      $history = [{ command: commandName, outputs: [output] }];
+      currentContent = output;
+      currentCommand = commandName;
+    }
+  }
+
+  async function handleTerminalCommand(event: CustomEvent<{ command: string; args: string[]; output: string }>) {
+    const { command, args, output } = event.detail;
+
+    // If it's a nav command, update the main view
+    if (navCommands.includes(command) && args.length === 0) {
+      currentContent = output;
+      currentCommand = command;
+    } else {
+      // For non-nav commands, we could show output differently
+      // For now, just update the content area
+      currentContent = output;
+      currentCommand = command;
     }
   }
 </script>
@@ -31,19 +60,52 @@
   {/if}
 </svelte:head>
 
-<div class="h-full flex flex-col p-2 sm:p-4" style={`background-color: ${$theme.background};`}>
+<div class="app-container" style={`background-color: ${$theme.background};`}>
   <NavBar on:command={handleNavCommand} />
   
   <main
-    class="flex-1 border rounded-md p-3 sm:p-4 overflow-auto text-xs sm:text-sm md:text-base"
+    class="main-content"
     style={`background-color: ${$theme.background}; color: ${$theme.foreground}; border-color: ${$theme.purple};`}
   >
-    <History />
-
-    <div class="flex flex-col md:flex-row">
-      <Ps1 />
-
-      <Input />
-    </div>
+    <ContentView content={currentContent} command={currentCommand} />
   </main>
+
+  <footer class="terminal-footer">
+    <TerminalInput on:command={handleTerminalCommand} />
+  </footer>
 </div>
+
+<style>
+  .app-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .app-container {
+      padding: 1rem;
+    }
+  }
+
+  .main-content {
+    flex: 1;
+    border: 1px solid;
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 640px) {
+    .main-content {
+      padding: 2rem;
+    }
+  }
+
+  .terminal-footer {
+    flex-shrink: 0;
+  }
+</style>

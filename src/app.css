@@ -54,12 +54,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Terminal output spacing */
-.whitespace-pre {
-  line-height: 1.6;
-  letter-spacing: 0.02em;
-}
-
 /* Selection color - matches theme */
 ::selection {
   background-color: rgba(203, 166, 247, 0.3);
@@ -81,10 +75,35 @@ input {
   caret-color: #cba6f7;
 }
 
-/* Responsive font sizing */
+/* Pre-formatted text */
+pre {
+  font-family: 'Cascadia Code', monospace;
+  margin: 0;
+}
+
+/* Content transitions */
+.main-content {
+  transition: opacity 0.15s ease;
+}
+
+/* Responsive adjustments */
 @media (max-width: 640px) {
-  .whitespace-pre {
-    font-size: 0.75rem;
-    line-height: 1.5;
+  pre {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 641px) {
+  pre {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+}
+
+@media (min-width: 1024px) {
+  pre {
+    font-size: 1rem;
+    line-height: 1.8;
   }
 }
