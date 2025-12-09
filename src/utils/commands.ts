@@ -40,14 +40,11 @@ On my free time, I enjoy playing or watching basketball.
 Location: Cambridge, MA`,
 
   // ============ PROJECTS ============
+  // Projects are loaded from /projects/index.json by ContentView
   projects: () => `Projects
 ────────
 
-[1] AI Drone Project
-    Details coming soon...
-
-[2] More projects TBD
-    Check back later for updates!`,
+`,
 
   // ============ BLOG ============
   blog: async (args: string[]) => {
@@ -118,15 +115,11 @@ No posts yet. Check back soon!`;
 `,
 
   // ============ ADVENT OF CODE ============
+  // AoC solutions are loaded from /aoc/index.json by ContentView
   aoc: () => `Advent of Code
 ──────────────
 
-Coming soon!
-
-I'll be adding my solutions for various years here.
-Check back later for updates.
-
-Learn more at adventofcode.com`,
+`,
 
   // ============ CONTACT ============
   contact: () => `Contact
@@ -160,13 +153,7 @@ type 'email', 'github', or 'linkedin' to open directly.`,
     return '';
   },
 
-  banner: () => `
-       _                         _   _                   
-      | | __ _ ___  ___  _ __   | | | | ___  _ __   __ _ 
-   _  | |/ _\` / __|/ _ \\| '_ \\  | |_| |/ _ \\| '_ \\ / _\` |
-  | |_| | (_| \\__ \\ (_) | | | | |  _  | (_) | | | | (_| |
-   \\___/ \\__,_|___/\\___/|_| |_| |_| |_|\\___/|_| |_|\\__, |
-                                                   |___/ 
+  banner: () => `Jason Hong
 
 CS @ MIT
 `,

@@ -47,6 +47,21 @@
       currentCommand = command;
     }
   }
+
+  function handleBlogPost(event: CustomEvent<{ content: string; slug: string }>) {
+    currentContent = event.detail.content;
+    currentCommand = 'blog-post';
+  }
+
+  function handleProjectDetail(event: CustomEvent<{ content: string; slug: string }>) {
+    currentContent = event.detail.content;
+    currentCommand = 'project-detail';
+  }
+
+  function handleAoCDay(event: CustomEvent<{ content: string; year: number; day: number }>) {
+    currentContent = event.detail.content;
+    currentCommand = 'aoc-day';
+  }
 </script>
 
 <svelte:head>
@@ -67,7 +82,7 @@
     class="main-content"
     style={`background-color: ${$theme.background}; color: ${$theme.foreground}; border-color: ${$theme.purple};`}
   >
-    <ContentView content={currentContent} command={currentCommand} on:command={handleNavCommand} />
+    <ContentView content={currentContent} command={currentCommand} on:command={handleNavCommand} on:blogpost={handleBlogPost} on:projectdetail={handleProjectDetail} on:aocday={handleAoCDay} />
   </main>
 
   <footer class="terminal-footer">

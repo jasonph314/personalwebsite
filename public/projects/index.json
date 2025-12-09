@@ -1,0 +1,9 @@
+[
+  {
+    "slug": "ai-drone-project",
+    "title": "AI Drone Project",
+    "description": "Autonomous drone navigation using computer vision and machine learning",
+    "tags": ["Python", "Computer Vision", "ML"],
+    "featured": true
+  }
+]

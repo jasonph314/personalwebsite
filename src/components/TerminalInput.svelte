@@ -24,9 +24,11 @@
         return;
       }
 
-      if (e.key === '/' && !visible) {
+      if (e.key === '/') {
         e.preventDefault();
         visible = true;
+        // Focus input directly for when terminal is already visible
+        setTimeout(() => input?.focus(), 10);
       }
     };
 
