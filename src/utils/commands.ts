@@ -6,7 +6,7 @@ import { theme } from "../stores/theme";
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
   help: () => {
     const categories = {
-      "Navigation": ["about", "projects", "blog", "aoc", "resume"],
+      "Navigation": ["about", "projects", "blog", "uses", "aoc", "resume"],
       "Contact": ["github", "linkedin", "email", "contact"],
       "System": ["help", "clear", "banner", "theme"],
     };
@@ -124,6 +124,27 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     window.open('/resume.pdf', '_blank');
     return 'Opening resume in new tab...';
   },
+
+  // ============ USES / SETUP ============
+  uses: () => `
+  What I Use
+  ----------
+
+  Editor
+    Neovim - The one true editor. Configured for speed
+    and efficiency with a minimal setup.
+
+  Hardware
+    Kinesis Advantage 360 - Split ergonomic keyboard.
+    Once you go ergo, you never go back.
+
+  OS / Environment
+    Omarchy - My daily driver. A beautifully crafted
+    Arch-based distro that just works.
+
+  ---
+  Type 'about' to learn more about me.
+`,
 
   // ============ ADVENT OF CODE ============
   aoc: () => `
