@@ -94,7 +94,7 @@
         type="text"
         class="terminal-input"
         style={`color: ${$theme.foreground};`}
-        placeholder="Type a command..."
+        placeholder="Type 'help' for available commands"
         aria-label="Terminal command input"
       />
       <span class="hint" style={`color: ${$theme.brightBlack};`}>
@@ -126,12 +126,12 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
   }
 
   .prompt {
     white-space: nowrap;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 500;
   }
 
@@ -141,7 +141,7 @@
     border: none;
     outline: none;
     font-family: 'Cascadia Code', monospace;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
   }
 
   .terminal-input::placeholder {
@@ -149,7 +149,7 @@
   }
 
   .hint {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     white-space: nowrap;
   }
 
@@ -162,7 +162,7 @@
     border: none;
     cursor: pointer;
     font-family: 'Cascadia Code', monospace;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     transition: opacity 0.2s;
   }
 
@@ -183,7 +183,7 @@
     padding: 0.2rem 0.5rem;
     border-radius: 0.25rem;
     font-family: 'Cascadia Code', monospace;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 600;
   }
 </style>

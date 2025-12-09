@@ -30,7 +30,7 @@
 >
   <!-- Logo/Home button -->
   <button
-    class="home-button px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-semibold transition-all duration-200 hover:scale-105"
+    class="home-button px-2 py-1 sm:px-3 sm:py-1.5 rounded text-sm sm:text-base font-semibold transition-all duration-200 hover:scale-105"
     style={`color: ${$theme.purple}; border: 1px solid ${$theme.purple};`}
     on:click={() => handleClick('banner')}
     on:mouseenter={(e) => {
@@ -48,7 +48,7 @@
   <div class="flex items-center gap-1 sm:gap-2 flex-wrap">
     {#each navItems as item}
       <button
-        class="nav-button px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm transition-all duration-200 hover:scale-105"
+        class="nav-button px-2 py-1 sm:px-3 sm:py-1.5 rounded text-sm sm:text-base transition-all duration-200 hover:scale-105"
         style={`color: ${$theme.foreground}; border: 1px solid ${$theme.brightBlack};`}
         on:click={() => handleClick(item.command)}
         on:mouseenter={(e) => {
@@ -69,7 +69,7 @@
   <div class="flex items-center gap-1 sm:gap-2">
     {#each socialLinks as link}
       <button
-        class="social-button px-2 py-1 sm:px-2.5 sm:py-1.5 rounded text-xs sm:text-sm transition-all duration-200 hover:scale-105"
+        class="social-button px-2 py-1 sm:px-2.5 sm:py-1.5 rounded text-sm sm:text-base transition-all duration-200 hover:scale-105"
         style={`color: ${$theme.cyan}; border: 1px solid ${$theme.brightBlack};`}
         title={link.label}
         on:click={() => handleClick(link.command)}

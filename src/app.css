@@ -86,24 +86,24 @@ pre {
   transition: opacity 0.15s ease;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments - ~15% larger for readability */
 @media (max-width: 640px) {
   pre {
-    font-size: 0.85rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
   }
 }
 
 @media (min-width: 641px) {
   pre {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.8;
   }
 }
 
 @media (min-width: 1024px) {
   pre {
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 1.15rem;
+    line-height: 1.85;
   }
 }

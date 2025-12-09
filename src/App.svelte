@@ -67,7 +67,7 @@
     class="main-content"
     style={`background-color: ${$theme.background}; color: ${$theme.foreground}; border-color: ${$theme.purple};`}
   >
-    <ContentView content={currentContent} command={currentCommand} />
+    <ContentView content={currentContent} command={currentCommand} on:command={handleNavCommand} />
   </main>
 
   <footer class="terminal-footer">

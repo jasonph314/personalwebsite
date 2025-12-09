@@ -111,23 +111,11 @@ No posts yet. Check back soon!`;
   },
 
   // ============ SETUP ============
-  setup: () => `My Setup
-────────
+  // Note: The actual neofetch-style display is handled by ContentView.svelte
+  setup: () => `Setup
+─────
 
-Editor
-  Neovim
-  The one true editor. Configured for speed and 
-  efficiency with a minimal setup.
-
-Hardware
-  Kinesis Advantage 360
-  Split ergonomic keyboard. Once you go ergo, 
-  you never go back.
-
-OS / Environment
-  Omarchy
-  My daily driver. A beautifully crafted 
-  Arch-based distro that just works.`,
+`,
 
   // ============ ADVENT OF CODE ============
   aoc: () => `Advent of Code
