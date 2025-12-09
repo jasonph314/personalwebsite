@@ -6,6 +6,9 @@
 
   // Check if this is the banner (ASCII art)
   $: isBanner = command === 'banner';
+  
+  // Check if this is the resume (embedded PDF)
+  $: isResume = command === 'resume';
 
   // Parse content into title and body
   $: parsed = parseContent(content);
@@ -50,6 +53,28 @@
     <!-- Banner: ASCII art centered -->
     <div class="banner-container">
       <pre class="banner-art" style={`color: ${$theme.purple};`}>{parsed.body}</pre>
+    </div>
+  {:else if isResume}
+    <!-- Resume: Embedded PDF -->
+    <div class="resume-container">
+      <h1 class="section-title" style={`color: ${$theme.purple};`}>Resume</h1>
+      <div class="section-divider" style={`background-color: ${$theme.brightBlack};`}></div>
+      <div class="pdf-wrapper">
+        <iframe
+          src="/resume.pdf"
+          title="Jason Hong Resume"
+          class="pdf-embed"
+        ></iframe>
+      </div>
+      <a 
+        href="/resume.pdf" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="download-link"
+        style={`color: ${$theme.cyan}; border-color: ${$theme.brightBlack};`}
+      >
+        Open in new tab ↗
+      </a>
     </div>
   {:else if parsed.title}
     <!-- Regular content with title -->
@@ -148,5 +173,44 @@
     .section-body {
       font-size: 1rem;
     }
+  }
+
+  /* Resume styles */
+  .resume-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem 0;
+  }
+
+  .pdf-wrapper {
+    flex: 1;
+    min-height: 400px;
+    margin-bottom: 1rem;
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+
+  .pdf-embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+    border-radius: 0.375rem;
+  }
+
+  .download-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.15s ease;
+    width: fit-content;
+  }
+
+  .download-link:hover {
+    opacity: 0.8;
   }
 </style>

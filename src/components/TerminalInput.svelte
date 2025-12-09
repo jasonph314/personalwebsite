@@ -72,56 +72,67 @@
       }
     }
   }
+
+  function handleHintClick() {
+    visible = true;
+  }
 </script>
 
-{#if visible}
-  <div 
-    class="terminal-input-container"
-    style={`background-color: ${$theme.background}; border-color: ${$theme.brightBlack};`}
-  >
-    <span class="prompt" style={`color: ${$theme.brightBlack};`}>
-      guest@jasonhong.net:~$
-    </span>
-    <input
-      bind:this={input}
-      bind:value={command}
-      on:keydown={handleKeyDown}
-      type="text"
-      class="terminal-input"
-      style={`color: ${$theme.foreground};`}
-      placeholder="Type a command..."
-      aria-label="Terminal command input"
-    />
-    <span class="hint" style={`color: ${$theme.brightBlack};`}>
-      ESC to close
-    </span>
-  </div>
-{:else}
-  <div 
-    class="terminal-hint"
-    style={`color: ${$theme.brightBlack};`}
-    on:click={() => visible = true}
-    on:keydown={(e) => e.key === 'Enter' && (visible = true)}
-    role="button"
-    tabindex="0"
-  >
-    Press <span style={`color: ${$theme.purple};`}>/</span> to type a command
-  </div>
-{/if}
+<div class="terminal-footer" style={`border-color: ${$theme.brightBlack};`}>
+  {#if visible}
+    <div 
+      class="terminal-input-container"
+      style={`background-color: ${$theme.background};`}
+    >
+      <span class="prompt" style={`color: ${$theme.purple};`}>
+        guest@jasonhong.net:~$
+      </span>
+      <input
+        bind:this={input}
+        bind:value={command}
+        on:keydown={handleKeyDown}
+        type="text"
+        class="terminal-input"
+        style={`color: ${$theme.foreground};`}
+        placeholder="Type a command..."
+        aria-label="Terminal command input"
+      />
+      <span class="hint" style={`color: ${$theme.brightBlack};`}>
+        ESC to close
+      </span>
+    </div>
+  {:else}
+    <button 
+      class="terminal-hint"
+      style={`color: ${$theme.foreground}; background-color: ${$theme.background};`}
+      on:click={handleHintClick}
+      aria-label="Open terminal"
+    >
+      <span class="hint-text">
+        Press <kbd style={`color: ${$theme.purple}; background-color: ${$theme.brightBlack}30;`}>/</kbd> to open terminal
+      </span>
+    </button>
+  {/if}
+</div>
 
 <style>
+  .terminal-footer {
+    border-top: 1px solid;
+    margin-top: 0.5rem;
+  }
+
   .terminal-input-container {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    border-top: 1px solid;
-    font-size: 0.875rem;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
   }
 
   .prompt {
     white-space: nowrap;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 500;
   }
 
   .terminal-input {
@@ -130,7 +141,7 @@
     border: none;
     outline: none;
     font-family: 'Cascadia Code', monospace;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
   }
 
   .terminal-input::placeholder {
@@ -143,14 +154,36 @@
   }
 
   .terminal-hint {
-    padding: 0.75rem 1rem;
-    text-align: right;
-    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: none;
     cursor: pointer;
+    font-family: 'Cascadia Code', monospace;
+    font-size: 0.9rem;
     transition: opacity 0.2s;
   }
 
   .terminal-hint:hover {
     opacity: 0.8;
+  }
+
+  .hint-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: 'Cascadia Code', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
   }
 </style>

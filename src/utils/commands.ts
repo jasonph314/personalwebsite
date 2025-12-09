@@ -11,7 +11,7 @@ Navigation
   blog       Read blog posts
   setup      My development setup
   aoc        Advent of Code solutions
-  resume     Open my resume (PDF)
+  resume     View my resume
 
 Contact
   contact    View contact info
@@ -103,11 +103,11 @@ No posts yet. Check back soon!`;
 
   // ============ RESUME ============
   resume: () => {
-    window.open('/resume.pdf', '_blank');
+    // Return empty - the ContentView component handles the PDF embed
     return `Resume
 ──────
 
-Opening resume in new tab...`;
+`;
   },
 
   // ============ SETUP ============

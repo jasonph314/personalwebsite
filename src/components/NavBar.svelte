@@ -25,9 +25,26 @@
 </script>
 
 <nav 
-  class="flex items-center justify-between px-4 py-3 mb-4 rounded-md"
+  class="flex items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 mb-3 sm:mb-4 rounded-md"
   style={`background-color: ${$theme.background}; border: 1px solid ${$theme.brightBlack};`}
 >
+  <!-- Logo/Home button -->
+  <button
+    class="home-button px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs sm:text-sm font-semibold transition-all duration-200 hover:scale-105"
+    style={`color: ${$theme.purple}; border: 1px solid ${$theme.purple};`}
+    on:click={() => handleClick('banner')}
+    on:mouseenter={(e) => {
+      e.currentTarget.style.backgroundColor = `${$theme.purple}20`;
+    }}
+    on:mouseleave={(e) => {
+      e.currentTarget.style.backgroundColor = 'transparent';
+    }}
+    title="Home"
+  >
+    JH
+  </button>
+
+  <!-- Main nav items -->
   <div class="flex items-center gap-1 sm:gap-2 flex-wrap">
     {#each navItems as item}
       <button
@@ -48,6 +65,7 @@
     {/each}
   </div>
 
+  <!-- Social links -->
   <div class="flex items-center gap-1 sm:gap-2">
     {#each socialLinks as link}
       <button
@@ -71,13 +89,13 @@
 </nav>
 
 <style>
-  .nav-button, .social-button {
+  .home-button, .nav-button, .social-button {
     font-family: 'Cascadia Code', monospace;
     cursor: pointer;
     background: transparent;
   }
 
-  .nav-button:focus, .social-button:focus {
+  .home-button:focus, .nav-button:focus, .social-button:focus {
     outline: none;
   }
 </style>
