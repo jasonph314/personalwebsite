@@ -1,82 +1,50 @@
 # jasonhong.net
 
-Personal portfolio website built with Svelte, styled with a terminal aesthetic and the Rainy Night color theme.
+Personal website — Projects, Blog, Resume.
 
-## Features
+## Stack
 
-- Terminal-style interface with clickable navigation
-- Custom "Rainy Night" color theme (moody purples/blues)
-- Responsive design
-- Markdown blog system
-- JSON-driven projects showcase
-- Advent of Code solutions with embedded code
-- Clean, Monkeytype-inspired aesthetics
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `about` | Learn about me |
-| `projects` | View my projects |
-| `blog` | Read blog posts |
-| `resume` | Open resume PDF |
-| `aoc` | Advent of Code solutions |
-| `contact` | Contact information |
-| `github` | Open GitHub profile |
-| `linkedin` | Open LinkedIn profile |
-| `email` | Send an email |
-| `help` | List all commands |
-| `theme ls/set` | Change color theme |
-
-## Content Management
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions on:
-- Adding blog posts
-- Adding projects
-- Adding Advent of Code solutions
-- Updating your resume
+- **Python + Flask** — lightweight server
+- **Mistletoe** — markdown to HTML with math & syntax highlighting extensions
+- **KaTeX** — math rendering (inline `$...$`, display `$$...$$`)
+- **highlight.js** — code syntax highlighting
+- **CAT-SOOP diagrams.js** — ASCII art diagrams to SVG
 
 ## Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py           # runs on http://localhost:8080
 ```
 
-## Project Structure
+## Content Management
 
-```
-public/
-  blog/
-    index.json          # Blog post metadata
-    posts/              # Markdown blog posts
-  projects/
-    index.json          # Project metadata
-  aoc/
-    index.json          # AoC years metadata
-    2024/               # Solutions by year
-      01.md, 02.md...
-  resume.pdf            # Resume file
-src/
-  components/           # Svelte components
-  utils/commands.ts     # Terminal commands
-  stores/theme.ts       # Theme state
+All content lives in `content/` as Markdown files:
+
+- `content/index.md` — homepage
+- `content/projects.md` — projects intro (project cards from `content/projects/index.json`)
+- `content/blog.md` — blog intro (post list from `content/blog/index.json`)
+- `content/blog/posts/*.md` — individual blog posts
+- `content/resume.md` — resume page
+- `content/aoc.md` — Advent of Code intro
+
+### Adding a Blog Post
+
+1. Write a `.md` file in `content/blog/posts/`
+2. Add an entry to `content/blog/index.json`:
+   ```json
+   { "slug": "my-post", "title": "My Post", "date": "2026-05-20", "description": "A great post" }
+   ```
+
+### Adding a Project
+
+Add an entry to `content/projects/index.json`:
+```json
+{ "slug": "my-project", "title": "My Project", "description": "...", "tags": ["Python", "ML"], "featured": true }
 ```
 
 ## Deployment
 
-Deployed on Vercel with custom domain `jasonhong.net`.
-
-## Credits
-
-Based on [m4tt72/terminal](https://github.com/m4tt72/terminal) template.
-Color theme inspired by [omarchy-rainynight-theme](https://github.com/atif-1402/omarchy-rainynight-theme).
+Deployed on **Vercel** via `vercel.json` + `runtime.txt`.

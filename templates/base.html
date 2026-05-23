@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{ content_header }} — {{ site_title }}{% endblock %}</title>
+    <link rel="icon" href="/static/icon.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="/static/css/katex.min.css" />
+    <script src="/static/js/katex.min.js"></script>
+
+    <!-- Diagrams (CAT-SOOP / Markdeep ASCII art → SVG) -->
+    <script src="/static/js/cs_diagrams.js"></script>
+
+    <!-- highlight.js -->
+    <script src="/static/js/highlight.min.js"></script>
+    <script src="/static/js/highlightjs-line-numbers.js"></script>
+
+    <!-- KaTeX rendering -->
+    <script>
+    var catsoop = catsoop || {};
+    catsoop.render_math = function (elt) {
+        var tex = elt.innerText;
+        var display = elt.classList.contains('cs_displaymath');
+        try {
+            katex.render(tex, elt, {displayMode: display});
+        } catch(e) {
+            elt.innerHTML = "<span style='color:red'><b>Could not parse math:</b> <code>" + tex + "</code></span>";
+        }
+        elt.classList.remove('cs_math_to_render');
+    };
+    catsoop.render_all_math = function (elt) {
+        var mathelts = (elt || document).getElementsByClassName('cs_math_to_render');
+        while (mathelts.length > 0) {
+            catsoop.render_math(mathelts[0]);
+        }
+    };
+    document.addEventListener("DOMContentLoaded", function() {
+        catsoop.render_all_math();
+    });
+    </script>
+
+    <!-- highlight.js init -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('pre code').forEach(function(block) {
+            hljs.highlightBlock(block);
+        });
+        document.querySelectorAll('code.highlight-lines').forEach(function(b) {
+            hljs.lineNumbersBlock(b);
+            if ((b.innerHTML.trim().match(/\r\n|\r|\n/g) || []).length > 0) {
+                b.parentElement.style = "padding-left: 0px !important;";
+                b.classList.add('hljs');
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="cs_header">
+        <div class="nav-container">
+            <div class="cs_header_text">
+                <a href="/">{{ site_title }}</a>
+            </div>
+            <nav class="cs_nav_links">
+                <a href="/projects/">Projects</a>
+                <a href="/blog/">Blog</a>
+                <a href="/resume/">Resume</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    {% if breadcrumbs %}
+    <div id="cs_top_navigation" class="cs_navigation cs_top_navigation">
+        {% for label, url in breadcrumbs %}
+            {% if url %}
+                <a href="{{ url }}">{{ label }}</a>
+            {% else %}
+                <span>{{ label }}</span>
+            {% endif %}
+            {% if not loop.last %}<span class="cs_nav_separator"> / </span>{% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main id="cs_body" class="cs_body">
+        <div class="cs_content">
+            <div class="cs_page_body">
+                {% if content_header %}
+                <h1 class="cs_content_header">{{ content_header }}</h1>
+                {% endif %}
+                <div class="cs_content_inner">
+                    {{ content|safe }}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="cs_footer">
+            <p>&copy; {{ current_year }} {{ site_title }}</p>
+            <p style="font-size:0.8rem;color:#888;margin-top:0.25rem;">
+                Layout inspired by <a href="https://catsoop.mit.edu" style="color:#666;">CAT-SOOP</a>,
+                the learning platform behind MIT course 6.
+            </p>
+            <pre style="font-family:monospace;font-size:0.6rem;color:#aaa;background:transparent;border:none;line-height:1.1;margin:0.25rem auto 0;display:inline-block;">
+  /\
+ /  \    CAT-SOOP
+/____\   miau.
+            </pre>
+        </div>
+    </footer>
+
+    <!-- Diagram rendering -->
+    {% if diagram_sources %}
+    <script>
+    catsoop.diagram_sources = {
+        {% for diag_id, diag_src in diagram_sources.items() %}
+        "{{ diag_id }}": {{ diag_src|tojson }},
+        {% endfor %}
+    };
+    </script>
+    {% endif %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Render any diagram elements found in the page
+        var diagrams = document.querySelectorAll('diagram');
+        if (diagrams.length > 0 && catsoop.diagram_sources) {
+            diagrams.forEach(function(d) {
+                var id = d.getAttribute('id');
+                var src = catsoop.diagram_sources[id];
+                if (src) {
+                    try {
+                        // cs_diagrams.js expects <script type="x-markdeep/format">
+                        // We'll let it find the <diagram> elements directly instead
+                    } catch(e) {}
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

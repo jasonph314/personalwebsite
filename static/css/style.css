@@ -1,0 +1,380 @@
+/* ================================================================
+   Jason Hong — Personal Site
+   Layout inspired by CAT-SOOP's base.css
+   ================================================================ */
+
+/* --- CSS Variables --- */
+:root {
+    --cs-base-bg-color: #1a56db;      /* deep blue */
+    --cs-base-font-color: #ffffff;
+    --cs-light-bg-color: #3b82f6;     /* lighter blue for hovers */
+    --cs-light-font-color: #ffffff;
+    --cs-max-page-width: 900px;
+    --content-padding: 2rem;
+}
+
+/* --- Reset & Base --- */
+html {
+    height: 100%;
+    font-size: 16px;
+}
+body {
+    min-height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #fafafa;
+}
+code, kbd, pre, samp, tt {
+    font-family: "Cascadia Code", "JetBrains Mono", "Fira Code", Menlo,
+                 Consolas, Courier, monospace;
+    font-size: 0.9em;
+}
+
+/* --- Links --- */
+a {
+    color: var(--cs-base-bg-color);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Tooltips --- */
+.tooltip {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--cs-base-bg-color);
+}
+.tooltip::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    background: #333;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+    z-index: 100;
+}
+.tooltip:hover::after {
+    opacity: 1;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+    color: #111;
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; margin-top: 2rem; }
+h3 { font-size: 1.25rem; margin-top: 1.5rem; }
+h4 { font-size: 1.1rem; }
+
+blockquote {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-left: 3px solid #ccc;
+    color: #666;
+}
+code {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #f0f0f0;
+    color: #333;
+}
+pre {
+    padding: 1rem;
+    border-radius: 6px;
+    background: #f0f0f0;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+pre code {
+    padding: 0;
+    background: transparent;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+}
+th {
+    background: #f5f5f5;
+}
+
+/* --- Header --- */
+header {
+    width: 100%;
+    height: 3.5rem;
+    background: var(--cs-base-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+header a, header a:visited {
+    color: var(--cs-base-font-color);
+    text-decoration: none;
+}
+header a:hover {
+    opacity: 0.85;
+}
+.nav-container {
+    width: 100%;
+    max-width: var(--cs-max-page-width);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--content-padding);
+    height: 100%;
+}
+.cs_header_text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+.cs_nav_links {
+    display: flex;
+    gap: 1.5rem;
+}
+.cs_nav_links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+.cs_nav_links a:hover {
+    border-bottom-color: var(--cs-base-font-color);
+    opacity: 1;
+}
+
+/* --- Breadcrumbs --- */
+.cs_navigation {
+    text-align: center;
+    padding: 0.75rem 2rem;
+}
+.cs_top_navigation {
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 3.5rem;
+    background: #fff;
+}
+.cs_navigation a {
+    color: #666;
+    font-size: 0.85rem;
+}
+.cs_navigation a:hover {
+    color: var(--cs-base-bg-color);
+}
+.cs_nav_separator {
+    color: #ccc;
+    margin: 0 0.5rem;
+}
+
+/* --- Main Content --- */
+main.cs_body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2rem var(--content-padding);
+}
+.cs_content {
+    width: 100%;
+    max-width: var(--cs-max-page-width);
+}
+.cs_page_body {
+    margin-bottom: 3rem;
+}
+.cs_content_header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--cs-base-bg-color);
+    color: var(--cs-base-bg-color);
+}
+.cs_content_inner {
+    line-height: 1.8;
+}
+.cs_content_inner img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+.cs_content_inner p {
+    margin: 1rem 0;
+}
+
+/* --- Project Cards --- */
+.project-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    background: #fff;
+    transition: box-shadow 0.2s;
+}
+.project-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.project-card h3 {
+    margin: 0 0 0.5rem 0;
+}
+.project-card p {
+    margin: 0 0 0.75rem 0;
+    color: #555;
+}
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.tag {
+    display: inline-block;
+    padding: 2px 10px;
+    background: #e8f0fe;
+    color: var(--cs-base-bg-color);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* --- Blog Entries --- */
+.blog-entry {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+.blog-entry:last-child {
+    border-bottom: none;
+}
+.blog-date {
+    color: #999;
+    font-size: 0.85rem;
+    margin-right: 0.75rem;
+}
+.blog-entry a {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.blog-entry p {
+    margin: 0.25rem 0 0 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--cs-base-bg-color);
+    color: #fff !important;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.btn:hover {
+    background: var(--cs-light-bg-color);
+    text-decoration: none;
+}
+
+/* --- Math --- */
+math {
+    display: inline-block;
+}
+displaymath {
+    display: block;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+/* --- Diagrams --- */
+diagram {
+    display: block;
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+/* --- Code Highlighting (IDLE-style) --- */
+.hljs { display: block; overflow-x: auto; padding: 0.5em; color: black; }
+.hljs-comment, .hljs-quote { color: #dd0000; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal { color: #ff7700; }
+.hljs-name { color: #008; }
+.hljs-variable, .hljs-template-variable { color: #660; }
+.hljs-string { color: #00aa00; }
+.hljs-regexp, .hljs-link { color: #080; }
+.hljs-title, .hljs-tag, .hljs-symbol, .hljs-bullet, .hljs-meta { color: #1c00cf; }
+.hljs-section, .hljs-type, .hljs-attr, .hljs-number, .hljs-params { color: inherit; }
+.hljs-built_in, .hljs-builtin-name { color: #900090; }
+.hljs-class .hljs-title { color: #0000ff; }
+.hljs-attribute, .hljs-subst { color: #000; }
+.hljs-formula { background-color: #eee; font-style: italic; }
+.hljs-addition { background-color: #baeeba; }
+.hljs-deletion { background-color: #ffc8bd; }
+.hljs-selector-id, .hljs-selector-class { color: #9b703f; }
+.hljs-doctag, .hljs-strong { font-weight: bold; }
+.hljs-emphasis { font-style: italic; }
+
+td.hljs-ln-numbers {
+    border-right: 2px solid #aaa;
+    text-align: right;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    background-color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+td.hljs-ln-code {
+    padding-left: 10px !important;
+}
+
+/* --- Footer --- */
+.cs_footer {
+    text-align: center;
+    background: #eee;
+    border-top: 1px solid #ddd;
+    padding: 2rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 700px) {
+    .cs_nav_links {
+        gap: 1rem;
+    }
+    .cs_nav_links a {
+        font-size: 0.85rem;
+    }
+    .cs_header_text {
+        font-size: 1.2rem;
+    }
+    .cs_content {
+        max-width: 100%;
+    }
+    .cs_page_body {
+        padding: 0;
+    }
+    main.cs_body {
+        padding: 1rem;
+    }
+}
