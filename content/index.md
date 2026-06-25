@@ -22,7 +22,7 @@ that Course 6 students know all too well.
 
 ## Recent Posts
 
-- [Drinking from the firehose (classes I took in the Spring)](/blog/classes-spring-2026)
+- [Drinking from the firehose](/blog/classes-spring-2026)
 
 ## My Setup
 
