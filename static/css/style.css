@@ -62,6 +62,46 @@ a:hover {
     text-decoration: underline;
 }
 
+/* --- Rainbow text --- */
+/* Gradient painted through the glyph shapes via background-clip: text,
+   then slid sideways for a shimmer. Stops start/end on the site's
+   purple so it reads as an accent, not a clashing rainbow.
+
+   When this class marks up a link, put it directly on the <a> (not a
+   nested <span>) so the underline below is declared on the same
+   element `a:hover` touches -- no cross-browser ambiguity about
+   whether a descendant can override a line drawn by its ancestor. */
+.rainbow {
+    background: linear-gradient(
+        90deg,
+        #7e4fd8, #e05fc4, #ff8a5c, #3ecf8e, #4f9dff, #7e4fd8
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: 600;
+    animation: rainbow-shift 4s linear infinite;
+}
+/* text-decoration-color defaults to currentColor, which is transparent
+   here (that's what hides the real glyph fill) -- so an underline needs
+   an explicit color or it paints invisibly. Kept on at all times, not
+   just on hover, since gradient text doesn't read as "link" the way
+   plain colored text does. */
+a.rainbow {
+    text-decoration: underline;
+    text-decoration-color: var(--cs-base-bg-color);
+    text-underline-offset: 2px;
+}
+@keyframes rainbow-shift {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .rainbow { animation: none; }
+}
+
 /* --- Tooltips --- */
 .tooltip {
     position: relative;

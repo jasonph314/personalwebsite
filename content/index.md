@@ -1,6 +1,6 @@
 # Hi, I'm Jason Hong
 
-I'm a course 6 (Computer Science) student at MIT. I'm deeply interested
+I'm a course 6 (Computer Science) student at <span class="rainbow">MIT</span>. I'm deeply interested
 in performance engineering and building reliable systems that can
 maximize our machines.
 
@@ -22,7 +22,7 @@ that Course 6 students know all too well.
 
 ## Recent Posts
 
-- [Drinking from the firehose](/blog/classes-spring-2026)
+- <a href="/blog/classes-spring-2026" class="rainbow">Drinking from the firehose</a>
 
 ## My Setup
 
