@@ -26,7 +26,10 @@ LANG_LIST = [
     "diff", "patch", "nginx", "makefile", "dockerfile", "plaintext", "text",
 ]
 
-LANG_PATTERN = "|".join(LANG_LIST)
+# Language aliases include regex metacharacters such as ``c++``. Escape
+# every alias before assembling the pattern so importing the Flask app cannot
+# fail with "multiple repeat".
+LANG_PATTERN = "|".join(re.escape(language) for language in LANG_LIST)
 
 
 class SyntaxHighlightedCodeSpan(SpanToken):
