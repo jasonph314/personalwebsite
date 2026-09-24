@@ -14,7 +14,6 @@ that Course 6 students know all too well.
 ```
 
 <div style="display:flex;gap:1rem;margin-top:1.5rem;">
-<a href="/projects/" class="btn">View Projects</a>
 <a href="/blog/" class="btn">Read Blog</a>
 <a href="/resume/" class="btn">Resume</a>
 </div>

@@ -219,7 +219,6 @@ def _compile_context(**extra):
         "site_title": "Jason Hong",
         "current_year": datetime.now().year,
         "breadcrumbs": [("Home", "/")],
-        "projects": _load_json("projects/index.json"),
         "blog_posts": _load_json("blog/index.json"),
     }
     ctx.update(extra)
