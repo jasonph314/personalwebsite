@@ -1,3 +1,3 @@
 # Blog
 
-Thoughts, notes, and write-ups.
+Some candid thoughts about classes, CS, life, etc.
