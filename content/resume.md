@@ -10,7 +10,7 @@
   <p class="resume-location">Cambridge, MA</p>
 </div>
 
-GPA: 5.0/5.0. I also serve as an Associate Advisor and Orientation Leader.
+GPA: 5.0/5.0. I also serve as an Associate Advisor and a Lab Assistant for 6.191 Computation Structures.
 
 ## Timeline
 
@@ -22,12 +22,12 @@ GPA: 5.0/5.0. I also serve as an Associate Advisor and Orientation Leader.
   - 6.181 Operating Systems Engineering
   - 6.2050 Digital Systems Laboratory (FPGAs!)
   - 21G.101 Chinese I
-  - 21M.030 Introduction to Musics of the World
+  - ~~21M.030 Introduction to Musics of the World~~ ***didn't get this class***
+  - 21H.281 MIT and Slavery
 - **Activities:**
-  - MIT Khmer Club — in progress
-  - UROP with MIT LIDS under Prof. Tamara Broderick
-  - Potentially a 6.191 LA at MIT
-  - IM basketball
+  - 6.191 Computation Structures Lab Assistant (helping students learn about how computers are made!!)
+  - MIT Poker Club (***very casual***)
+  - IM ~~basketball~~ soccer
 
 <h3 class="resume-timeline-heading">Summer 2026</h3>
 
