@@ -23,11 +23,14 @@ GPA: 5.0/5.0. I also serve as an Associate Advisor and a Lab Assistant for 6.191
   - 6.2050 Digital Systems Laboratory (FPGAs!)
   - 21G.101 Chinese I
   - ~~21M.030 Introduction to Musics of the World~~ ***didn't get this class***
-  - 21H.281 MIT and Slavery
+  - ~~21H.281 MIT and Slavery~~ ***had to drop this class cuz of recruiting...***
 - **Activities:**
+  - IM ~~basketball soccer~~ basketball
   - 6.191 Computation Structures Lab Assistant (helping students learn about how computers are made!!)
+  - Associate Advisor
+  - BURSA @ MIT
+  - MIT SAGE (Student Advisory Group in Engineering) [Check it out here](https://engineering.mit.edu/undergraduate/student-advisory-group)
   - MIT Poker Club (***very casual***)
-  - IM ~~basketball~~ soccer
 
 <h3 class="resume-timeline-heading">Summer 2026</h3>
 
