@@ -2,6 +2,8 @@
 
 Personal website — Projects, Blog, Resume.
 
+The Chinese 1 oral presentation is available at `/chinese-1/`.
+
 ## Stack
 
 - **Python + Flask** — lightweight server

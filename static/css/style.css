@@ -282,6 +282,23 @@ main.cs_body {
     margin: 1rem 0;
 }
 
+/* --- Presentation --- */
+.presentation-embed {
+    width: 100%;
+    box-sizing: border-box;
+    aspect-ratio: 16 / 9;
+    border: 1px solid #ddd4ee;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+.presentation-embed iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 /* --- Project Cards --- */
 .project-card {
     border: 1px solid #e0e0e0;

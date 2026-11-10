@@ -323,6 +323,15 @@ def resume():
     return render_template("base.html", **ctx)
 
 
+@app.route("/chinese-1/")
+def chinese_1_presentation():
+    ctx = _compile_context(
+        content_header="Chinese 1 Oral Presentation",
+        breadcrumbs=[("Chinese 1 Presentation", "")],
+    )
+    return render_template("chinese_1.html", **ctx)
+
+
 @app.route("/aoc/")
 @app.route("/aoc/<int:year>/")
 @app.route("/aoc/<int:year>/<int:day>")

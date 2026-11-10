@@ -73,6 +73,7 @@
             <nav class="cs_nav_links">
                 <a href="/blog/">Blog</a>
                 <a href="/resume/">Resume</a>
+                <a href="/chinese-1/">Chinese 1</a>
             </nav>
         </div>
     </header>
@@ -96,7 +97,7 @@
         <div class="cs_content">
             <div class="cs_page_body">
                 <div class="cs_content_inner">
-                    {{ content|safe }}
+                    {% block content %}{{ content|safe }}{% endblock %}
                 </div>
             </div>
         </div>
