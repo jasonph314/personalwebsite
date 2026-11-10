@@ -4,21 +4,14 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, Response, abort, make_response, render_template, request, send_from_directory
+from flask import Flask, render_template, send_from_directory, abort
 from mistletoe import Document
 from mistletoe.span_token import SpanToken
 from mistletoe.block_token import BlockToken, tokenize
 from mistletoe.html_renderer import HTMLRenderer
-from werkzeug.security import check_password_hash
 import html as html_mod
 
 app = Flask(__name__)
-
-# Only the salted hash is stored in source; the presentation password is shared separately.
-CHINESE_1_PASSWORD_HASH = (
-    "pbkdf2:sha256:600000$NgZm9Jj4bhkZzwo1$"
-    "ddef9a2a42372ba70389a67005458b243a8cfd33d64dfeaa5a691207ff391f8f"
-)
 
 # ---------------------------------------------------------------------------
 # Mistletoe Extensions (inspired by CAT-SOOP's markdown.py)
@@ -332,25 +325,11 @@ def resume():
 
 @app.route("/chinese-1/")
 def chinese_1_presentation():
-    credentials = request.authorization
-    authorized = (
-        credentials is not None
-        and credentials.type == "basic"
-        and credentials.username == "viewer"
-        and check_password_hash(CHINESE_1_PASSWORD_HASH, credentials.password or "")
+    ctx = _compile_context(
+        content_header="Chinese 1 Oral Presentation",
+        breadcrumbs=[("Chinese 1 Presentation", "")],
     )
-    if not authorized:
-        response = Response("Password required.", status=401)
-        response.headers["WWW-Authenticate"] = 'Basic realm="Chinese 1 Presentation"'
-    else:
-        ctx = _compile_context(
-            content_header="Chinese 1 Oral Presentation",
-            breadcrumbs=[("Chinese 1 Presentation", "")],
-        )
-        response = make_response(render_template("chinese_1.html", **ctx))
-    response.headers["Cache-Control"] = "private, no-store"
-    response.headers["Vary"] = "Authorization"
-    return response
+    return render_template("chinese_1.html", **ctx)
 
 
 @app.route("/aoc/")

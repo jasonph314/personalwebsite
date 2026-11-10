@@ -2,7 +2,7 @@
 
 Personal website — Projects, Blog, Resume.
 
-The Chinese 1 oral presentation is available at `/chinese-1/`. It uses HTTP Basic Auth with the username `viewer`; its password is shared separately and only a salted hash is stored in the app.
+The Chinese 1 oral presentation is available at `/chinese-1/`.
 
 ## Stack
 
